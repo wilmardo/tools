@@ -51,6 +51,9 @@ setup_kernel ${STAGEDIR}/work
 setup_packages ${STAGEDIR}/work
 setup_extras ${STAGEDIR}/work ${SELF}
 
+sed -i '' -e 's:<protocol>https</protocol>:<protocol>http</protocol>:' \
+    ${STAGEDIR}/work/${CONFIG_XML}
+
 MD=$(mdconfig -a -t swap -s ${NANO_MEDIASIZE} -x ${NANO_SECTS} -y ${NANO_HEADS})
 
 # NanoBSD knobs; do not change lightly
@@ -127,7 +130,7 @@ awk '
 }
 ' | fdisk -i -f - ${MD}
 
-boot0cfg -B -b ${STAGEDIR}/work/boot/boot0sio -o packet -s 1 -m 3 ${MD}
+boot0cfg -B -b ${STAGEDIR}/work/boot/boot0sio -o nopacket -s 1 -m 3 ${MD}
 
 setup_partition()
 {
