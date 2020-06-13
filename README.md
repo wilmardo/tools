@@ -1,3 +1,6 @@
+https://github.com/yrzr/tools
+https://github.com/nekoprog/tools
+
 About the OPNsense tools
 ========================
 
